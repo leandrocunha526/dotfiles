@@ -10,3 +10,4 @@
 - vim simple vimrc.
 - vscode settings.json file backup.
 - packages_backup listing all packages using `dpkg --get-selections > packages.list` for future (if necessary).
+- snap-packages with a script for install packages using snap (snapd) of the Canonical.
