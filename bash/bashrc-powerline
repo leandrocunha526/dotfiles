@@ -128,6 +128,10 @@ export DEBFULLNAME="Leandro Cunha"
 export DEBEMAIL="leandrocunha016@gmail.com"
 export QUILT_PATCHES=debian/patches
 
+# sbuild
+alias gbpbuild='gbp buildpackage --git-builder=sbuild -v --no-clean-source'
+alias bp="gbp buildpackage --git-builder=sbuild -v --source-only-changes"
+
 # Android
 export ANDROID_HOME=~/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -146,4 +150,3 @@ export GEM_HOME=~/.gems
 source <(ng completion script)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
