@@ -9,3 +9,4 @@
 - sbuild: sbuild configuration file.
 - vim simple vimrc.
 - vscode settings.json file backup.
+- packages_backup with listing all packages using `dpkg --get-selections > packages.list` for future (if necessary).
