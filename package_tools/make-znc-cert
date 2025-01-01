@@ -1,0 +1,4 @@
+ #!/bin/bash
+ mv /var/lib/znc/znc.pem  /var/lib/znc/znc-backup.pem
+ cd "$RENEWED_LINEAGE"
+ cat {privkey,cert,chain}.pem > /var/lib/znc/znc.pem
