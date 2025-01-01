@@ -72,23 +72,24 @@ vim.g.coc_global_extensions = {
   'coc-phpls',
   'coc-yaml',
   'coc-prettier',
+  'coc-eslint'
 }
 
-vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {})
-vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', {})
-vim.api.nvim_set_keymap('n', 'gi', '<Plug>(coc-implementation)', {})
-vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', {})
-vim.cmd([[autocmd CursorHold * silent call CocActionAsync('highlight')]])
-vim.api.nvim_set_keymap('i', '<S-TAB>', 'pumvisible() ? \'<C-p>\' : \'<C-h>\'', { expr = true })
-
--- Definir a função de documentação em Lua
 vim.api.nvim_exec([[
 function! ShowDocumentation()
-  " Sua lógica para mostrar documentação aqui
+  " Verifique se há clientes LSP ativos
+  if luaeval('#vim.lsp.buf_get_clients() > 0')
+    lua vim.lsp.buf.hover()
+  else
+    " Abra o :help como fallback
+    let l:word = expand('<cword>') " Palavra sob o cursor
+    execute 'help ' . l:word
+  endif
 endfunction
 ]], false)
 
-vim.api.nvim_set_keymap('n', 'K', ':call ShowDocumentation()<CR>', { noremap = true, silent = true })
+-- Mapear a tecla '<C-k>' para chamar a função
+vim.api.nvim_set_keymap('n', '<C-k>', ':call ShowDocumentation()<CR>', { noremap = true, silent = true })
 
 -- Terminal
 vim.cmd([[
@@ -135,7 +136,7 @@ require("mason").setup()
 
 -- Configurar integração Mason-LSP
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "pyright", "clangd", "solargraph" }, -- Substitua pelos servidores que deseja
+    ensure_installed = { "lua_ls", "pyright", "clangd", "solargraph", "perlnavigator" },
     automatic_installation = true,
 })
 
